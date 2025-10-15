@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "yarn test",
+    "build": "yarn build",
     "client": "webpack serve --devtool inline-source-map --hot --config webpack.client.config.js"
   },
   "repository": {
