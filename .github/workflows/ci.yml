@@ -1,0 +1,81 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      # - develop
+  pull_request:
+    branches:
+      - main
+      # - develop
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+        
+    steps:
+    # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+    # Step 1a:  Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+    # Step &b: Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+
+    # Step 2: Set up Node.js (uses matrix version)
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+    # Step 3: Install dependencies
+      - name: Install dependencies
+        # run: npm install
+        run: npm ci
+
+      # Step 4: Lint the codebase
+      - name: Run ESLint
+        run: npm run lint
+
+      # Step 5: Run Jest tests (with ts-jest)
+      - name: Run Jest tests
+        run: npm test -- --coverage
+
+      # Step 6: Run tests
+      - name: Run tests
+        run: npm test
+   
+      # Step 7: Upload test coverage (optional)
+      # - name: Upload coverage to Codecov
+      #   if: success()
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }} 
+
+      # - name: Build project
+      #   run: npm run build # If your project has a build step
+
+      # ✅ What each part does:
+
+      # Step	Description
+      # on.push / on.pull_request	Triggers pipeline on pushes or PRs to main
+      # strategy.matrix	Tests multiple Node versions
+      # actions/checkout	Pulls your repo code into the workflow runner
+      # actions/setup-node	Installs Node and enables dependency caching
+      # npm ci	Installs exact dependency versions (clean environment)
+      # npm run lint	Runs ESLint
+      # npm test	Runs Jest (or your configured test runner)
+      # Codecov step	Optionally uploads coverage reports
