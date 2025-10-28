@@ -2,13 +2,13 @@
   "name": "tarocco",
   "version": "0.0.1",
   "description": "A Tarot-Oracle-inspired Web Application",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests" & "sh tests/build_smoke.sh",
+    "test": "jest --passWithNoTests & sh tests/build_smoke.sh",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build": "yarn build",
-    "client": "webpack serve --devtool inline-source-map --hot --config webpack.client.config.js"
+    "client": "webpack serve --devtool inline-source-map --hot --config webpack.client.config.js",
+    "client:build": "webpack --config webpack.client.build.config.js"
   },
   "repository": {
     "type": "git",
@@ -29,11 +29,20 @@
   "homepage": "https://github.com/renerr23/tarocco#readme",
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-helmet": "^6.1.0"
   },
-   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
@@ -58,6 +67,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
+    "mini-css-extract-plugin": "^2.9.4",
     "prettier": "^3.6.2",
     "style-loader": "^4.0.0",
     "ts-jest": "^29.4.5",

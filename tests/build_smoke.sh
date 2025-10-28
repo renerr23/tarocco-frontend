@@ -21,7 +21,7 @@ if [ ! -f dist/client/bundle.js ]; then
   exit 1
 fi
 
-sudo kill -9 $PID
+kill -9 $PID
 
 echo "Smoke test passed successfully!"
 exit 0

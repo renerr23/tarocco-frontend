@@ -28,7 +28,6 @@ This document describes the overall architecture of the project, its major compo
 
 | Tooling | pnpm (TBD), ESLint, Prettier, Docker |
 
- 
 ---
 
 ## 🧩 Directory Structure
